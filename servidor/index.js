@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 })
 
 app.post('/create', (req, res) => {
-    const concepto = req.body.name
+    const concepto = req.body.concepto
     console.log(concepto)
     const monto = req.body.monto
     const fecha = req.body.fecha
@@ -28,6 +28,19 @@ app.post('/create', (req, res) => {
                 console.log(err)
             }else{
                 res.send('Values inserted')
+            }
+        }
+    )
+})
+
+app.get('/operaciones', (req, res) => {
+    db.query(
+        'SELECT * FROM operaciones',
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
             }
         }
     )
