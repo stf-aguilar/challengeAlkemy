@@ -35,7 +35,7 @@ app.post('/create', (req, res) => {
 
 app.get('/operaciones', (req, res) => {
     db.query(
-        'SELECT * FROM operaciones',
+        'SELECT *, date_format(fecha, "%d-%m-%Y") AS fecha FROM operaciones',
         (err, result) => {
             if(err){
                 console.log(err)

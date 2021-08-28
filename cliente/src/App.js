@@ -1,6 +1,7 @@
 import './App.css';
 import Nav from './components/Nav'
 import Abm from './components/Abm'
+import Home from './components/Home'
 //import Shop from './components/Shop'
 import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,14 +18,6 @@ function App() {
       </div>
     </Router>
   );
-}
-
-const Home = () => {
-  return(
-    <div>
-      <h1>Home Page</h1>
-    </div>
-  )
 }
 
 export default App;

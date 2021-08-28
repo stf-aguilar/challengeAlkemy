@@ -21,26 +21,18 @@ nav{
 
 .contenedor{
   display:flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .contenido{
-  width:500px;
+  width:60%;
   height:auto;
-}
-
-.contenido-izq{
-  background: sienna;
-}
-
-.contenido-der{
-  background:teal;
 }
 
 .information {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 30%;
   justify-content: center;
   align-items: center;
 }
