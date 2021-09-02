@@ -1,38 +1,85 @@
 import '../App.css'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { Table, Form, FormLabel, FormControl, FormSelect} from 'react-bootstrap';
-
+import { Table, Form, FormLabel, FormControl, FormSelect, Button} from 'react-bootstrap';
+//const getOperaciones = require('../helpers/getOperaciones')
 
 function Abm() {
   const [concepto, setConcepto] = useState('')
   const [monto, setMonto] = useState(0)
   const [fecha, setFecha] = useState('')
   const [tipo, setTipo] = useState('')
+  
   const [operacionesLista, setOperacionesLista] = useState([])
+  
+  const [newMonto, setNewMonto] = useState(0)
+  const [newConcepto, setNewConcepto] = useState('')
+  const [newFecha, setNewFecha] = useState('')
+
 
   const agregarOperacion = () => {
-    Axios.post('http://localhost:3001/create', {
+    Axios.post('http://localhost:3010/create', {
       concepto:concepto,
       monto:monto,
       fecha:fecha,
       tipo:tipo
     }).then(()=> {
-      console.log('success')
-      getOperaciones()
+      setOperacionesLista([
+        ...operacionesLista,
+        {
+          concepto:concepto,
+          monto:monto,
+          fecha:fecha,
+          tipo:tipo
+        }
+      ])
     }) 
   }
+  
 
   useEffect(() => {
    getOperaciones()
   }, []) 
 
+  
 const getOperaciones = () => {
-    Axios.get('http://localhost:3001/operaciones').then((response)=> {
-      setOperacionesLista(response.data)
+    Axios.get('http://localhost:3010/operaciones').then(
+      (response)=> {
+        setOperacionesLista(response.data)
     }) 
   }
 
+  
+
+const updateOperacion = (id) => {
+  Axios.put('http://localhost:3010/update', {
+    id:id,
+    concepto:(!newConcepto) ? operacionesLista[id].concepto:newConcepto,
+    monto:(!newMonto) ? operacionesLista[id].monto:newMonto,
+    fecha:(!newFecha) ? operacionesLista[id].fecha:newFecha,
+    tipo:tipo
+  }).then(
+    (response)=>{
+      setOperacionesLista(
+        operacionesLista.map((val) =>{
+          return val.id == id
+          ? {
+            id:val.id,
+            concepto:(!newConcepto) ? val.concepto:newConcepto,
+            monto:(!newMonto) ? val.monto:newMonto,
+            fecha:(!newFecha) ? val.fecha:newFecha,
+            tipo:val.tipo
+          }
+          : val;
+        })
+      )
+      Array.from(document.querySelectorAll("input")).forEach(
+        input => (input.value = "")
+      );
+      alert('update')
+  })
+} 
+ 
   return (
     <div>
      <div className="contenedor">
@@ -46,6 +93,7 @@ const getOperaciones = () => {
               <th>Monto</th>
               <th>Fecha</th>
               <th>Tipo</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -56,10 +104,41 @@ const getOperaciones = () => {
                 return(
                   <tr key={key}>
                     <td>{val.id}</td>
-                    <td>{val.concepto}</td>
-                    <td>${val.monto}</td>
-                    <td>{val.fecha}</td>
+                    <td>{val.concepto}
+                      <input 
+                        type="text" 
+                        placeholder="Nuevo concepto"
+                        onChange={(e) => {
+                          setNewConcepto(e.target.value)
+                        }}
+                      />
+                    </td>
+                    <td>${val.monto}
+                      <input 
+                        type="number" 
+                        placeholder="Nuevo monto"
+                        onChange={(e) => {
+                          setNewMonto(e.target.value)
+                        }}
+                      />
+                    </td>
+                    <td>{val.fecha}
+                      <input 
+                        type="date" 
+                        onChange={(e) => {
+                          setNewFecha(e.target.value)
+                        }}
+                      />
+                    </td>
                     <td>{val.tipo}</td>
+                    <td>
+                      <Button variant="danger" className="boton" size="sm">Delete</Button>
+                      <Button 
+                        variant="primary" 
+                        className="boton" 
+                        size="sm" 
+                        onClick={() => {updateOperacion(val.id)}}>Update</Button>
+                    </td>
                   </tr>
                 )
               }
@@ -75,6 +154,7 @@ const getOperaciones = () => {
               <th>Monto</th>
               <th>Fecha</th>
               <th>Tipo</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -90,6 +170,20 @@ const getOperaciones = () => {
                   <td>${val.monto}</td>
                   <td>{val.fecha}</td>
                   <td>{val.tipo}</td>
+                  <td>
+                      <Button 
+                        variant="danger" 
+                        className="boton" 
+                        size="sm">Delete
+                      </Button>
+                      <Button 
+                        variant="primary" 
+                        className="boton" 
+                        size="sm" 
+                        onClick={() => updateOperacion(val.id)}>
+                          Update
+                      </Button>
+                  </td>
                 </tr>
                 )
               }
@@ -121,15 +215,15 @@ const getOperaciones = () => {
                   }}
           />
           <Form.Label>Tipo:</Form.Label>
-          <Form.Select className="me-sm-2" id="inlineFormCustomSelect"
+          <Form.Select size="sm" id="inlineFormCustomSelect"
                   id="tipo"
                   onChange={(e) => {
                     setTipo(e.target.value)
                   }}
           >
-            <option>Seleccionar</option>
-            <option value="Ingreso">Ingreso</option>
-            <option value="Egreso">Egreso</option>
+              <option>Seleccionar</option>
+              <option value="Ingreso">Ingreso</option>
+              <option value="Egreso">Egreso</option>
           </Form.Select>
           <button onClick={agregarOperacion}>Agregar operación</button>
       </div>

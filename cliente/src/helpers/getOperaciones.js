@@ -1,10 +1,9 @@
 import Axios from 'axios'
 
-function getOperaciones(){
-    Axios.get('http://localhost:3001/operaciones').then((response)=> {
+export const getOperaciones = async () => {
+    const respuesta = await Axios.get('http://localhost:3001/operaciones').then((response)=> {
         console.log('desde getOperaciones',response.data)
-      return (response.data)
     }) 
+    return respuesta.data
   }
 
-  export default getOperaciones

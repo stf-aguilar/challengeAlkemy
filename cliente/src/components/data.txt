@@ -32,3 +32,12 @@ generarEstadistica(items: IngresoEgreso[]) {
     }
     this.doughnutChartData = [[ this.totalIngresos, this.totalEgresos ]];
   }
+
+
+  ////
+  ` SELECT * FROM operaciones LIMIT ${size}`
+
+  size ? ` SELECT * FROM operaciones LIMIT ${size}` : ` SELECT * FROM operaciones`
+  const sql = "SELECT * FROM operaciones"
+  
+size  ? `${sql} LIMIT ${size}` : sql

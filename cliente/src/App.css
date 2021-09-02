@@ -25,7 +25,7 @@ nav{
 }
 
 .contenido{
-  width:60%;
+  width:50%;
   height:auto;
 }
 
@@ -33,7 +33,7 @@ nav{
   display: flex;
   flex-direction: column;
   width: 30%;
-  justify-content: center;
+  justify-content:start;
   align-items: center;
 }
 
@@ -53,4 +53,23 @@ button{
 
 button:hover{
   cursor: pointer;
+}
+
+.boton{
+  width:80px;
+}
+
+/**** MEDIA QUERIES ****/
+@media screen and (max-width: 800px) {
+ .contenedor{
+   flex-direction:column;
+ }
+
+ .contenido{
+   width:100%;
+ }
+
+ .information{
+   width:100%;
+ }
 }
