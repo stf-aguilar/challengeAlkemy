@@ -88,7 +88,6 @@ const updateOperacion = (id) => {
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>#</th>
               <th>Concepto</th>
               <th>Monto</th>
               <th>Fecha</th>
@@ -103,7 +102,6 @@ const updateOperacion = (id) => {
               if(tipo == 'Ingreso'){
                 return(
                   <tr key={key}>
-                    <td>{val.id}</td>
                     <td>{val.concepto}
                       <input 
                         type="text" 
@@ -149,7 +147,6 @@ const updateOperacion = (id) => {
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>#</th>
               <th>Concepto</th>
               <th>Monto</th>
               <th>Fecha</th>
@@ -165,10 +162,32 @@ const updateOperacion = (id) => {
                 console.log('entró al if')
               return(
                 <tr key={key}>
-                  <td>{val.id}</td>
-                  <td>{val.concepto}</td>
-                  <td>${val.monto}</td>
-                  <td>{val.fecha}</td>
+                  <td>{val.concepto}
+                  <input 
+                        type="text" 
+                        placeholder="Nuevo concepto"
+                        onChange={(e) => {
+                          setNewConcepto(e.target.value)
+                        }}
+                      />
+                  </td>
+                  <td>${val.monto}
+                  <input 
+                        type="number" 
+                        placeholder="Nuevo monto"
+                        onChange={(e) => {
+                          setNewMonto(e.target.value)
+                        }}
+                      />
+                  </td>
+                  <td>{val.fecha}
+                    <input 
+                        type="date" 
+                        onChange={(e) => {
+                          setNewFecha(e.target.value)
+                        }}
+                    />
+                  </td>
                   <td>{val.tipo}</td>
                   <td>
                       <Button 
@@ -215,7 +234,7 @@ const updateOperacion = (id) => {
                   }}
           />
           <Form.Label>Tipo:</Form.Label>
-          <Form.Select size="sm" id="inlineFormCustomSelect"
+          <select  
                   id="tipo"
                   onChange={(e) => {
                     setTipo(e.target.value)
@@ -224,7 +243,7 @@ const updateOperacion = (id) => {
               <option>Seleccionar</option>
               <option value="Ingreso">Ingreso</option>
               <option value="Egreso">Egreso</option>
-          </Form.Select>
+          </select>
           <button onClick={agregarOperacion}>Agregar operación</button>
       </div>
      </div>  
