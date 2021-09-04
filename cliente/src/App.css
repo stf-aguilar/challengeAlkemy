@@ -6,7 +6,7 @@ nav{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 10vh;
+  min-height: 12vh;
   background:royalblue;
   color:white;
 }
@@ -20,8 +20,10 @@ nav{
 }
 
 .contenedor{
+  margin-top: 20px;
   display:flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .contenido{
@@ -29,10 +31,14 @@ nav{
   height:auto;
 }
 
+td input{
+  width: 127px;
+}
+
 .information {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 20%;
   justify-content:start;
   align-items: center;
 }
@@ -45,6 +51,11 @@ nav{
   margin: 5px;
 }
 
+.formulario-operacion{
+  display:flex;
+  flex-direction:column;
+
+}
 button{
   width: 150px;
   height: 50px;
@@ -63,7 +74,7 @@ select{
 }
 
 /**** MEDIA QUERIES ****/
-@media (max-width: 800px) {
+@media (max-width:1155px) {
 
   .contenedor{
     display: flex;
@@ -78,3 +89,5 @@ select{
    width:100%;
  }
 }
+
+

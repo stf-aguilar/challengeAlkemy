@@ -94,148 +94,160 @@ const deleteOperacion = (id) => {
     <div>
      <div className="contenedor">
       <div className="contenido">
-        <h4>Ingresos</h4>
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>Concepto</th>
-              <th>Monto</th>
-              <th>Fecha</th>
-              <th>Tipo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {operacionesLista.map((val, key)=> {
-              const tipo = val.tipo
+        <div className="titulo-operacion">        
+          <h4>Ingresos</h4>
+        </div>
+        <div className="tabla-operaciones">
+          <Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {operacionesLista.map((val, key)=> {
+                const tipo = val.tipo
+                
+                if(tipo == 'Ingreso'){
+                  return(
+                    <tr key={key}>
+                      <td>{val.concepto}
+                        <input 
+                          type="text" 
+                          placeholder="Nuevo concepto"
+                          onChange={(e) => {
+                            setNewConcepto(e.target.value)
+                          }}
+                        />
+                      </td>
+                      <td>${val.monto}
+                        <input 
+                          type="number" 
+                          placeholder="Nuevo monto"
+                          onChange={(e) => {
+                            setNewMonto(e.target.value)
+                          }}
+                        />
+                      </td>
+                      <td>{val.fecha}
+                        <input 
+                          type="date" 
+                          onChange={(e) => {
+                            setNewFecha(e.target.value)
+                          }}
+                        />
+                      </td>
+                      <td>{val.tipo}</td>
+                      <td>
+                        <Button 
+                          variant="danger" 
+                          className="boton" 
+                          size="sm"
+                          onClick={() => {deleteOperacion(val.id)}}
+                        >
+                          Delete
+                        </Button>
+                        <Button 
+                          variant="primary" 
+                          className="boton" 
+                          size="sm" 
+                          onClick={() => {updateOperacion(val.id)}}
+                        >
+                            Update
+                        </Button>
+                      </td>
+                    </tr>
+                  )
+                }
+              })}    
+            </tbody>
+          </Table>
+        </div>{/* cierro div tabla ingresos*/}
+        <div className="titulo-operacion">
+          <h4>Egresos</h4>
+        </div>
+        <div className="tabla-operaciones">
+          <Table striped bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {operacionesLista.map((val, key)=> {
+                const tipo = val.tipo
               
-              if(tipo == 'Ingreso'){
+                if(tipo == 'Egreso'){
+                  console.log('entró al if')
                 return(
                   <tr key={key}>
                     <td>{val.concepto}
-                      <input 
-                        type="text" 
-                        placeholder="Nuevo concepto"
-                        onChange={(e) => {
-                          setNewConcepto(e.target.value)
-                        }}
-                      />
+                    <input 
+                          type="text" 
+                          placeholder="Nuevo concepto"
+                          onChange={(e) => {
+                            setNewConcepto(e.target.value)
+                          }}
+                        />
                     </td>
                     <td>${val.monto}
-                      <input 
-                        type="number" 
-                        placeholder="Nuevo monto"
-                        onChange={(e) => {
-                          setNewMonto(e.target.value)
-                        }}
-                      />
+                    <input 
+                          type="number" 
+                          placeholder="Nuevo monto"
+                          onChange={(e) => {
+                            setNewMonto(e.target.value)
+                          }}
+                        />
                     </td>
                     <td>{val.fecha}
                       <input 
-                        type="date" 
-                        onChange={(e) => {
-                          setNewFecha(e.target.value)
-                        }}
+                          type="date" 
+                          onChange={(e) => {
+                            setNewFecha(e.target.value)
+                          }}
                       />
                     </td>
                     <td>{val.tipo}</td>
                     <td>
-                      <Button 
-                        variant="danger" 
-                        className="boton" 
-                        size="sm"
-                        onClick={() => {deleteOperacion(val.id)}}
-                      >
-                        Delete
-                      </Button>
-                      <Button 
-                        variant="primary" 
-                        className="boton" 
-                        size="sm" 
-                        onClick={() => {updateOperacion(val.id)}}
-                      >
+                        <Button 
+                          variant="danger" 
+                          className="boton" 
+                          size="sm"
+                          onClick={() => deleteOperacion(val.id)}
+                        >
+                          Delete   
+                        </Button>
+                        <Button 
+                          variant="primary" 
+                          className="boton" 
+                          size="sm" 
+                          onClick={() => updateOperacion(val.id)}
+                        >
                           Update
-                      </Button>
+                        </Button>
                     </td>
                   </tr>
-                )
-              }
-            })}    
-          </tbody>
-        </Table>
-        <h4>Egresos</h4>
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>Concepto</th>
-              <th>Monto</th>
-              <th>Fecha</th>
-              <th>Tipo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {operacionesLista.map((val, key)=> {
-              const tipo = val.tipo
-            
-              if(tipo == 'Egreso'){
-                console.log('entró al if')
-              return(
-                <tr key={key}>
-                  <td>{val.concepto}
-                  <input 
-                        type="text" 
-                        placeholder="Nuevo concepto"
-                        onChange={(e) => {
-                          setNewConcepto(e.target.value)
-                        }}
-                      />
-                  </td>
-                  <td>${val.monto}
-                  <input 
-                        type="number" 
-                        placeholder="Nuevo monto"
-                        onChange={(e) => {
-                          setNewMonto(e.target.value)
-                        }}
-                      />
-                  </td>
-                  <td>{val.fecha}
-                    <input 
-                        type="date" 
-                        onChange={(e) => {
-                          setNewFecha(e.target.value)
-                        }}
-                    />
-                  </td>
-                  <td>{val.tipo}</td>
-                  <td>
-                      <Button 
-                        variant="danger" 
-                        className="boton" 
-                        size="sm"
-                        onClick={() => deleteOperacion(val.id)}
-                      >
-                        Delete   
-                      </Button>
-                      <Button 
-                        variant="primary" 
-                        className="boton" 
-                        size="sm" 
-                        onClick={() => updateOperacion(val.id)}
-                      >
-                        Update
-                      </Button>
-                  </td>
-                </tr>
-                )
-              }
-            })}
-          </tbody>
-        </Table>
-      </div>
+                  )
+                }
+              })}
+            </tbody>
+          </Table>
+        </div>{/*cierro div tabla egresos */}
+      </div>{/*cierro div contenido */}
+
       <div className="information">
-        <h3>Formulario</h3>
+        <div className="titulo-operacion">
+          <h3>Formulario</h3>
+        </div>
+        <div className="formulario-operacion">          
           <Form.Label>Concepto:</Form.Label>
           <Form.Control 
                   type="text"
@@ -269,6 +281,7 @@ const deleteOperacion = (id) => {
               <option value="Egreso">Egreso</option>
           </select>
           <button onClick={agregarOperacion}>Agregar operación</button>
+        </div>          
       </div>
      </div>  
     </div>
