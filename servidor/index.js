@@ -16,7 +16,29 @@ const db = mysql.createConnection({
 })
 
 //routes
-app.post('/create', (req, res) => {
+app.get('/', (req, res) => {
+    res.json({ 
+        '/api/operaciones':'GET - Obtenemos todas las operaciones',
+        '/api/operaciones':'POST - Damos de alta una operación',
+        'api/operaciones/update':'PUT - Actualizamos los datos de una operación',
+        'api/operaciones/:id':'DELETE - Borramos los datos de una operación' 
+    })
+})
+
+app.get('/api/operaciones', (req, res) => {
+    db.query(
+        'SELECT *, date_format(fecha, "%d-%m-%Y") AS fecha FROM operaciones',
+        (err, result) => {
+            if(err){
+                console.log(err)
+            }else{
+                res.send(result)
+            }
+        }
+    )
+})
+
+app.post('/api/operaciones', (req, res) => {
     const concepto = req.body.concepto
     const monto = req.body.monto
     const fecha = req.body.fecha
@@ -35,20 +57,8 @@ app.post('/create', (req, res) => {
     )
 })
 
-app.get('/operaciones', (req, res) => {
-    db.query(
-        'SELECT *, date_format(fecha, "%d-%m-%Y") AS fecha FROM operaciones',
-        (err, result) => {
-            if(err){
-                console.log(err)
-            }else{
-                res.send(result)
-            }
-        }
-    )
-})
 
-app.put('/update', (req, res) => {
+app.put('/api/operaciones/update', (req, res) => {
     const id = req.body.id
     console.log(id)
     const monto = req.body.monto
@@ -75,7 +85,7 @@ app.put('/update', (req, res) => {
     )
 })
 
-app.delete('/delete/:id', (req, res) =>{
+app.delete('/api/operaciones/:id', (req, res) =>{
     const id = req.params.id
 
     db.query(
