@@ -16,15 +16,6 @@ const db = mysql.createConnection({
 })
 
 //routes
-app.get('/', (req, res) => {
-    res.json({ 
-        '/api/operaciones':'GET - Obtenemos todas las operaciones',
-        '/api/operaciones':'POST - Damos de alta una operación',
-        'api/operaciones/update':'PUT - Actualizamos los datos de una operación',
-        'api/operaciones/:id':'DELETE - Borramos los datos de una operación' 
-    })
-})
-
 app.get('/api/operaciones', (req, res) => {
     db.query(
         'SELECT *, date_format(fecha, "%d-%m-%Y") AS fecha FROM operaciones',
@@ -97,11 +88,12 @@ app.delete('/api/operaciones/:id', (req, res) =>{
             }
         })
 })
+
 //settings
-app.set('port', process.env.PORT || 3010)
+app.set('port', process.env.PORT || 8080)
 
 //starting the server
 app.listen(app.get('port'), () => {
-    console.log('server running on port 3010')
+    console.log('server running on port 8080')
 })
 

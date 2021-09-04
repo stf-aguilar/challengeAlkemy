@@ -18,7 +18,7 @@ function Abm() {
 
 
   const agregarOperacion = () => {
-    Axios.post('http://localhost:3010/api/operaciones', {
+    Axios.post('http://localhost:8080/api/operaciones', {
       concepto:concepto,
       monto:monto,
       fecha:fecha,
@@ -43,7 +43,7 @@ function Abm() {
 
   
 const getOperaciones = () => {
-    Axios.get('http://localhost:3010/api/operaciones').then(
+    Axios.get('http://localhost:8080/api/operaciones').then(
       (response)=> {
         setOperacionesLista(response.data)
     }) 
@@ -52,7 +52,7 @@ const getOperaciones = () => {
   
 
 const updateOperacion = (id) => {
-  Axios.put('http://localhost:3010/api/operaciones/update', {
+  Axios.put('http://localhost:8080/api/operaciones/update', {
     id:id,
     concepto:(!newConcepto) ? operacionesLista[id].concepto:newConcepto,
     monto:(!newMonto) ? operacionesLista[id].monto:newMonto,
@@ -81,7 +81,7 @@ const updateOperacion = (id) => {
 } 
 
 const deleteOperacion = (id) => {
-  Axios.delete(`http://localhost:3010/api/operaciones/${id}`).then((response) => {
+  Axios.delete(`http://localhost:8080/api/operaciones/${id}`).then((response) => {
     setOperacionesLista(
       operacionesLista.filter((val) => {
         return val.id != id
