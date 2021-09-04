@@ -79,6 +79,16 @@ const updateOperacion = (id) => {
       alert('update')
   })
 } 
+
+const deleteOperacion = (id) => {
+  Axios.delete(`http://localhost:3010/delete/${id}`).then((response) => {
+    setOperacionesLista(
+      operacionesLista.filter((val) => {
+        return val.id != id
+    }))
+    alert('delete')
+  })
+}
  
   return (
     <div>
@@ -130,12 +140,22 @@ const updateOperacion = (id) => {
                     </td>
                     <td>{val.tipo}</td>
                     <td>
-                      <Button variant="danger" className="boton" size="sm">Delete</Button>
+                      <Button 
+                        variant="danger" 
+                        className="boton" 
+                        size="sm"
+                        onClick={() => {deleteOperacion(val.id)}}
+                      >
+                        Delete
+                      </Button>
                       <Button 
                         variant="primary" 
                         className="boton" 
                         size="sm" 
-                        onClick={() => {updateOperacion(val.id)}}>Update</Button>
+                        onClick={() => {updateOperacion(val.id)}}
+                      >
+                          Update
+                      </Button>
                     </td>
                   </tr>
                 )
@@ -193,14 +213,18 @@ const updateOperacion = (id) => {
                       <Button 
                         variant="danger" 
                         className="boton" 
-                        size="sm">Delete
+                        size="sm"
+                        onClick={() => deleteOperacion(val.id)}
+                      >
+                        Delete   
                       </Button>
                       <Button 
                         variant="primary" 
                         className="boton" 
                         size="sm" 
-                        onClick={() => updateOperacion(val.id)}>
-                          Update
+                        onClick={() => updateOperacion(val.id)}
+                      >
+                        Update
                       </Button>
                   </td>
                 </tr>
