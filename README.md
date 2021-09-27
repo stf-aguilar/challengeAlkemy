@@ -1,6 +1,6 @@
 # Challenge Full Stack - JavaScript
 
-## Tech
+## Technologies
 - NodeJS
 - MySql
 - React
@@ -10,7 +10,7 @@
 Server running on port 8080
 
 ```sh
-cd challengeAlkemy
+cd challengeAlkemy/servidor
 npm install
 npm start
 ```
@@ -24,3 +24,11 @@ db configuration
     database:'presupuestoSistema'
 ```
 
+App running on port 3000.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+```sh
+cd challengeAlkemy/cliente
+npm install
+npm start
+```
