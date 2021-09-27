@@ -78,6 +78,7 @@ app.put('/api/operaciones/update', (req, res) => {
 
 app.delete('/api/operaciones/:id', (req, res) =>{
     const id = req.params.id
+    console.log(id)
 
     db.query(
         'DELETE from operaciones WHERE id = ?', id, (err, result) => {

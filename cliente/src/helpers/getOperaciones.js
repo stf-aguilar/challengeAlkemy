@@ -1,4 +1,4 @@
-import Axios from 'axios'
+/*import Axios from 'axios'
 
 export const getOperaciones = async () => {
     const respuesta = await Axios.get('http://localhost:3001/operaciones').then((response)=> {
@@ -7,3 +7,4 @@ export const getOperaciones = async () => {
     return respuesta.data
   }
 
+*/

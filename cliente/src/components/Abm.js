@@ -1,6 +1,7 @@
 import '../App.css'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
+import getOperaciones from '../services/getOperaciones'
 import { Table, Form, FormLabel, FormControl, FormSelect, Button} from 'react-bootstrap';
 //const getOperaciones = require('../helpers/getOperaciones')
 
@@ -38,10 +39,10 @@ function Abm() {
   
 
   useEffect(() => {
-   getOperaciones()
+   getOperaciones().then(operaciones => setOperacionesLista(operaciones))
   }, []) 
 
-  
+ /* código anterior  
 const getOperaciones = () => {
     Axios.get('http://localhost:8080/api/operaciones').then(
       (response)=> {
@@ -49,7 +50,7 @@ const getOperaciones = () => {
     }) 
   }
 
-  
+*/
 
 const updateOperacion = (id) => {
   Axios.put('http://localhost:8080/api/operaciones/update', {
